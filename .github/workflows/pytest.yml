@@ -1,0 +1,21 @@
+name: Pytest with Codecov
+
+on: 
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker image
+      run: docker build --target dev -t myapp:dev .
+    - name: Run pytest and generate coverage report
+      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:dev pytest --cov=src tests/
+    - name: Copy coverage report to host
+      run: docker cp $(docker create --rm myapp:dev):/app/.coverage ./.coverage
+    - name: Upload coverage report to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        fail_ci_if_error: true
