@@ -1,5 +1,5 @@
 ARG PY_VERSION=3.11
-FROM python:$PY_VERSION AS prod
+FROM python:$PY_VERSION AS base
 
 ARG USERNAME=vscode
 ARG USER_UID=1000
@@ -10,16 +10,23 @@ RUN groupadd --gid $USER_GID $USERNAME \
 WORKDIR /app
 COPY . /app/
 
-# Install Hatch and use it to install the default environment dependencies
-RUN pip3 install --no-cache-dir hatch && hatch env install default
-
-RUN chown -R $USERNAME /app 
 USER $USERNAME
 
-FROM prod AS dev
+FROM base AS dev
 
 USER root
-RUN hatch env install dev
+RUN pip3 install --no-cache-dir hatch build
+RUN hatch install dev
+
+# Build the wheel for the default environment
+RUN python3 -m build --wheel --outdir dist
+
 USER $USERNAME
 
-FROM prod
+FROM base AS prod
+
+# Install the built wheel from the dev stage
+COPY --from=dev /app/dist/*.whl /tmp/
+RUN pip3 install --no-cache-dir /tmp/*.whl
+
+USER $USERNAME
