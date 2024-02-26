@@ -1,16 +1,13 @@
 ARG PY_VERSION=3.11
 
 FROM python:$PY_VERSION as base
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
 # create non-root user (primarily for devcontainer)
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+RUN groupadd --gid 1000 vscode \
+    && useradd --uid 1000 --gid 1000 -m vscode
 
 WORKDIR /app
 COPY . /app/
-RUN chown -R $USERNAME /app
+RUN chown -R vscode /app
 
 FROM base AS hatch
 RUN pip3 install hatch
@@ -21,9 +18,9 @@ FROM base AS dev
 RUN pip3 install hatch 
 RUN hatch build
 RUN pip3 install $(find requirements -name 'requirement*.txt' -exec echo -n '-r {} ' \;)
-USER $USERNAME
+USER vscode
 
 FROM base AS prod
 COPY --from=dev /app/dist/*.whl /tmp
 RUN pip3 install /tmp/*.whl
-USER $USERNAME
+USER vscode
