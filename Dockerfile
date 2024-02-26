@@ -15,7 +15,7 @@ RUN chown -R $USERNAME /app
 FROM base AS hatch
 RUN pip3 install hatch
 ENV HATCH_ENV=default
-ENTRYPOINT hatch -e $HATCH_ENV run
+ENTRYPOINT hatch run
 
 FROM base AS dev
 RUN pip3 install hatch 
