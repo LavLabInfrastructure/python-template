@@ -45,7 +45,7 @@ pip-compile-hashes = true
 dependencies = []
 
 [tool.hatch.envs.default.scripts]
-build = "hatch build"
+build = "hatch build && chmod -R 777 dist/*"
 
 [tool.hatch.envs.test]
 dependencies = [
