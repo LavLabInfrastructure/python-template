@@ -16,4 +16,4 @@ jobs:
     - name: Apply formatting with Black
       run: docker run --rm -e HATCH_ENV=lint -v "${{ github.workspace }}:/app" myapp:hatch format
     - name: Run Pylint
-      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:hatch lint
+      run: docker run --rm -e HATCH_ENV=lint -v "${{ github.workspace }}:/app" myapp:hatch lint
