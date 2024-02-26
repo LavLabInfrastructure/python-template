@@ -1,4 +1,4 @@
-name: Pytest with Codecov
+name: Run Pytest and Codecov with Hatch
 
 on: 
   push:
@@ -12,7 +12,7 @@ jobs:
     - name: Build Docker image
       run: docker build --target dev -t myapp:dev .
     - name: Run pytest and generate coverage report
-      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:dev pytest --cov=src tests/
+      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:dev hatch run pytest
     - name: Copy coverage report to host
       run: docker cp $(docker create --rm myapp:dev):/app/.coverage ./.coverage
     - name: Upload coverage report to Codecov

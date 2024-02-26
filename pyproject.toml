@@ -26,20 +26,6 @@ classifiers = [
 ]
 dependencies = []
 
-[project.optional-dependencies]
-lint = [
-    "black",
-    "pylint"
-]
-docs = [
-    "sphinx",
-    "sphinx-rtd-theme"
-]
-dev = [
-    "python-template[lint]",
-    "python-template[docs]"
-]
-
 [project.urls]
 Documentation = "https://github.com/unknown/python-template#readme"
 Issues = "https://github.com/unknown/python-template/issues"
@@ -49,31 +35,56 @@ Source = "https://github.com/unknown/python-template"
 path = "src/python_template/__about__.py"
 
 [tool.hatch.envs.default]
-dependencies = [
-  "coverage[toml]>=6.5",
-  "pytest",
-]
-[tool.hatch.envs.default.scripts]
-test = "pytest {args:tests}"
-test-cov = "coverage run -m pytest {args:tests}"
-cov-report = [
-  "- coverage combine",
-  "coverage report",
-]
-cov = [
-  "test-cov",
-  "cov-report",
-]
+dependencies = []
+scripts = {}
 
-[[tool.hatch.envs.all.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+[tool.hatch.envs.test]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+  "coverage[toml]>=6.2"
+]
+scripts = {
+  test = "pytest {args:tests}",
+  cov = "pytest --cov=src --cov-report=term-missing {args:tests}"
+}
+
+[tool.hatch.envs.lint]
+dependencies = [
+  "pylint",
+  "black"
+]
+scripts = {
+  lint = "pylint src tests",
+  format = "black src tests",
+  check = "black src tests --check"
+}
 
 [tool.hatch.envs.types]
 dependencies = [
   "mypy>=1.0.0",
 ]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/python_template tests}"
+scripts = {
+  check = "mypy --install-types --non-interactive {args:src/python_template tests}",
+}
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs",
+  "mkdocstrings",
+  "mkdocs-material",
+  "mkdocs-autorefs",
+  "mkdocs-minify-plugin",
+  "mkdocs-material-extensions",
+  "mkdocs-git-revision-date-localized-plugin"
+]
+scripts = {
+  build-docs = "mkdocs build",
+  serve-docs = "mkdocs serve",
+}
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
 [tool.coverage.run]
 source_pkgs = ["python_template", "tests"]
