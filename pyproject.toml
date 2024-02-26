@@ -27,16 +27,25 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Documentation = "https://github.com/unknown/python-template#readme"
-Issues = "https://github.com/unknown/python-template/issues"
-Source = "https://github.com/unknown/python-template"
+Documentation = "https://github.com/LavLabInfrastructure/python-template#readme"
+Issues = "https://github.com/LavLabInfrastructure/python-template/issues"
+Source = "https://github.com/LavLabInfrastructure/python-template"
 
 [tool.hatch.version]
 path = "src/python_template/__about__.py"
 
+[tool.hatch.env]
+requires = [
+    "hatch-pip-compile"
+]
+
 [tool.hatch.envs.default]
+type = "pip-compile"
+pip-compile-hashes = true
 dependencies = []
-scripts = {}
+
+[tool.hatch.envs.default.scripts]
+build = "hatch build"
 
 [tool.hatch.envs.test]
 dependencies = [
@@ -44,29 +53,26 @@ dependencies = [
   "pytest-cov",
   "coverage[toml]>=6.2"
 ]
-scripts = {
-  test = "pytest {args:tests}",
-  cov = "pytest --cov=src --cov-report=term-missing {args:tests}"
-}
+[tool.hatch.envs.test.scripts]
+test = "pytest {args:tests}"
+cov = "pytest --cov=src --cov-report=term-missing {args:tests}"
 
 [tool.hatch.envs.lint]
 dependencies = [
   "pylint",
   "black"
 ]
-scripts = {
-  lint = "pylint src tests",
-  format = "black src tests",
-  check = "black src tests --check"
-}
+[tool.hatch.envs.lint.scripts]
+lint = "pylint src tests"
+format = "black src tests"
+check = "black src tests --check"
 
 [tool.hatch.envs.types]
 dependencies = [
   "mypy>=1.0.0",
 ]
-scripts = {
-  check = "mypy --install-types --non-interactive {args:src/python_template tests}",
-}
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/python_template tests}"
 
 [tool.hatch.envs.docs]
 dependencies = [
@@ -78,10 +84,9 @@ dependencies = [
   "mkdocs-material-extensions",
   "mkdocs-git-revision-date-localized-plugin"
 ]
-scripts = {
-  build-docs = "mkdocs build",
-  serve-docs = "mkdocs serve",
-}
+[tool.hatch.envs.docs.scripts]
+build-docs = "mkdocs build"
+serve-docs = "mkdocs serve"
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]

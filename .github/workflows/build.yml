@@ -1,4 +1,4 @@
-name: Build Wheel
+name: Build Wheel using Hatch
 
 on:
   push:
@@ -12,11 +12,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build Docker image
-      run: docker build --target dev -t myapp:dev .
+      run: docker build --target hatch -t myapp:hatch .
     - name: Build wheel with build module
-      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:dev python -m build --wheel
+      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:hatch build
     - name: Copy wheel to host
-      run: docker cp $(docker create --rm myapp:dev):/app/dist ./
+      run: docker cp $(docker create --rm myapp:hatch):/app/dist ./
     - name: Upload wheel
       uses: actions/upload-artifact@v3
       with:
