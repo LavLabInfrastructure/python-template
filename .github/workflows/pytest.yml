@@ -10,11 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build Docker image
-      run: docker build --target dev -t myapp:dev .
+      run: docker build --target hatch -t myapp:hatch .
     - name: Run pytest and generate coverage report
-      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:dev  pytest
+      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:hatch  pytest
     - name: Copy coverage report to host
-      run: docker cp $(docker create --rm myapp:dev):/app/.coverage ./.coverage
+      run: docker cp $(docker create --rm myapp:hatch):/app/.coverage ./.coverage
     - name: Upload coverage report to Codecov
       uses: codecov/codecov-action@v3
       with:
