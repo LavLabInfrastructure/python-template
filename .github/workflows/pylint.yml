@@ -12,8 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build Docker image
-      run: docker build --target dev -t myapp:dev .
+      run: docker build --target hatch -t myapp:hatch .
     - name: Apply formatting with Black
-      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:dev format
+      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:hatch format
     - name: Run Pylint
-      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:dev lint
+      run: docker run --rm -v "${{ github.workspace }}:/app" myapp:hatch lint
