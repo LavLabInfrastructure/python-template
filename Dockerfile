@@ -15,7 +15,7 @@ RUN chown -R $USERNAME /app
 FROM base AS hatch
 RUN pip3 install hatch
 USER $USERNAME
-CMD hatch run
+ENTRYPOINT hatch run
 
 FROM base AS dev
 RUN pip3 install hatch $(find requirements -name 'requirement*.txt' -exec echo -n '-r {} ' \;)
