@@ -1,9 +1,9 @@
 ARG PY_VERSION=3.11
+
+FROM python:$PY_VERSION as base
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
-FROM python:$PY_VERSION as base
 # create non-root user (primarily for devcontainer)
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
