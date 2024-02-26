@@ -14,9 +14,7 @@ jobs:
     - name: Build Docker image
       run: docker build --target hatch -t myapp:hatch .
     - name: Build wheel with build module
-      run: docker run --rm myapp:hatch build
-    - name: Copy wheel to host
-      run: docker cp $(docker create --rm myapp:hatch):/app/dist ./
+      run: mkdir dist && docker run -v ./dist:/app/dist--rm myapp:hatch build
     - name: Upload wheel
       uses: actions/upload-artifact@v3
       with:
