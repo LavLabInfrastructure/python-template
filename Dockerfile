@@ -18,8 +18,9 @@ ENV HATCH_ENV=default
 ENTRYPOINT hatch run -e $HATCH_ENV
 
 FROM base AS dev
-RUN pip3 install hatch $(find requirements -name 'requirement*.txt' -exec echo -n '-r {} ' \;)
+RUN pip3 install hatch 
 RUN hatch build
+RUN pip3 install $(find requirements -name 'requirement*.txt' -exec echo -n '-r {} ' \;)
 USER $USERNAME
 
 FROM base AS prod
