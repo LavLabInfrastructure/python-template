@@ -1,4 +1,4 @@
-
+"""just an example function"""
 def example(rv):
     """Example function for demonstrating pytest functionality
 Always returns the given param
