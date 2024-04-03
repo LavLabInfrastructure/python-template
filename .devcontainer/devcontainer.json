@@ -8,17 +8,16 @@
         "vscode": {
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "bash",
-                "python.defaultInterpreterPath": "/usr/local/bin/python",
-                "python.analysis.typeCheckingMode": "basic",
-                "python.linting.enabled": true,
-                "python.linting.pylintEnabled": true,
-                "python.formatting.provider": "black",
-                "editor.formatOnSave": true
+                "python.defaultInterpreterPath": "/usr/bin/python3",
+                "autoDocstring.docstringFormat": "sphinx"
             },
             "extensions": [
-                "ms-python.python",
-                "ms-python.vscode-pylance",
                 "ms-toolsai.jupyter",
+                "ms-python.python",
+                "ms-python.pylint",
+                "ms-python.black-formatter",
+                "ms-python.isort",
+                "ms-python.mypy-type-checker",
                 "editorconfig.editorconfig",
                 "njpwerner.autodocstring",
                 "lextudio.restructuredtext",
