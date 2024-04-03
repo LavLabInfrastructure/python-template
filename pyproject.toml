@@ -59,6 +59,7 @@ cov = "pytest --cov=src --cov-report=term-missing {args:tests}"
 
 [tool.hatch.envs.lint]
 dependencies = [
+  "pytest",
   "pylint",
   "black"
 ]
