@@ -4,3 +4,4 @@ dist
 !.github
 !.gitignore
 !.devcontainer
+__pycache__
