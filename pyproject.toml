@@ -34,6 +34,9 @@ Source = "https://github.com/LavLabInfrastructure/python-template"
 [tool.hatch.version]
 path = "src/python_template/__about__.py"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/python_template"]
+
 [tool.hatch.env]
 requires = [
     "hatch-pip-compile"
