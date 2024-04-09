@@ -17,7 +17,7 @@ ENTRYPOINT ["hatch", "run"]
 FROM base AS dev
 RUN pip3 install hatch 
 RUN hatch build
-RUN pip3 install $(find requirements -name 'requirement*.txt' -exec echo -n '-r {} ' \;)
+RUN pip3 install $(find /app -name 'requirement*.txt' -exec echo -n '-r {} ' \;)
 USER vscode
 
 FROM base AS prod
