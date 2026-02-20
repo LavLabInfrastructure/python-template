@@ -1,6 +1,16 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"  # For Python projects
-    directory: "/"            # Location of your Python project's root directory
+  - package-ecosystem: "pip"
+    directory: "/"
     schedule:
-      interval: "weekly"      # Check for updates weekly
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
