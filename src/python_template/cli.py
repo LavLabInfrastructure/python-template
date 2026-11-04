@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from collections.abc import Sequence
 
 from python_template.__about__ import __version__
 from python_template.example import example
@@ -50,7 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Entry point for the CLI.
 
     :param argv: argument list to parse (defaults to sys.argv[1:])

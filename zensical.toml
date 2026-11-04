@@ -1,0 +1,35 @@
+[project]
+site_name = "Python Template"
+nav = ["index.md", { "API Reference" = "api.md" }]
+
+[project.theme]
+variant = "modern"
+features = [
+  "content.code.copy",
+  "navigation.sections",
+  "navigation.expand",
+  "search.highlight",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.plugins.mkdocstrings.handlers.python.options]
+show_source = true
+show_root_heading = true
+heading_level = 2
+
+[project.plugins.minify]
+minify_html = true
+
+[project.plugins.autorefs]
+enabled = true

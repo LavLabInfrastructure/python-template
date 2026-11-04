@@ -1,14 +1,14 @@
-"""just an example function"""
+"""Example library function."""
+
+from typing import TypeVar
+
+_Value = TypeVar("_Value")
 
 
-def example(rv):
-    """Example function for demonstrating pytest functionality.
+def example(value: _Value) -> _Value:
+    """Return the given value unchanged.
 
-    Always returns the given param.
-
-    :param rv: passthrough to return value
-    :type rv: Any
-    :return: value passed to rv
-    :rtype: Any
+    :param value: value to pass through
+    :return: the same value
     """
-    return rv
+    return value

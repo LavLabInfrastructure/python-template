@@ -4,6 +4,8 @@ Thank you for your interest in contributing! This document provides guidelines f
 
 ## Development Setup
 
+**Prerequisites:** Python 3.11+ and [Hatch](https://hatch.pypa.io/latest/install/).
+
 1. **Clone the repository:**
 
    ```console
@@ -14,19 +16,19 @@ Thank you for your interest in contributing! This document provides guidelines f
 2. **Install Hatch** (build & environment manager):
 
    ```console
-   pip install hatch
+   python -m pip install --upgrade hatch
    ```
 
 3. **Install pre-commit hooks:**
 
    ```console
-   pip install pre-commit
+   python -m pip install --upgrade pre-commit
    pre-commit install
    ```
 
 ## Common Tasks
 
-All project tasks are managed through [Hatch environments](https://hatch.pypa.io/latest/environment/):
+Project dependencies and task environments are managed through [Hatch](https://hatch.pypa.io/latest/environment/) and declared in `pyproject.toml`.
 
 | Task                    | Command                      |
 |-------------------------|------------------------------|
@@ -83,17 +85,15 @@ def test_example_returns_input_unchanged():
    git checkout -b feature/my-change
    ```
 
-2. **Make your changes** and ensure all checks pass:
+2. **Make your changes** and run the complete pre-commit check suite:
 
    ```console
-   hatch run lint:all
-   hatch run test:cov
-   hatch run types:check
+   make check
    ```
 
 3. **Commit** with a clear, descriptive message. Pre-commit hooks will run Ruff automatically.
 
-4. **Open a Pull Request** against `main`. The CI pipeline will run linting, tests, and build checks.
+4. **Open a Pull Request** against `main`. The CI pipeline will run linting, type checks, tests, documentation build, and package build.
 
 ## Docker
 

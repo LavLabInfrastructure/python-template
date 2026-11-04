@@ -1,4 +1,4 @@
-ARG PY_VERSION=3.12
+ARG PY_VERSION=3.14
 
 FROM python:${PY_VERSION}-slim AS base
 
@@ -20,15 +20,16 @@ ENV HATCH_ENV=default
 ENTRYPOINT ["hatch", "run"]
 
 FROM base AS dev
-COPY requirements/ requirements/
-COPY requirements.txt ./
 COPY tests/ tests/
 COPY docs/ docs/
-COPY mkdocs.yml ./
-RUN pip3 install --no-cache-dir hatch \
-    && hatch build \
-    && pip3 install --no-cache-dir $(find /app -name 'requirement*.txt' -exec echo -n '-r {} ' \;)
+COPY zensical.toml ./
+RUN python -m pip install --no-cache-dir --upgrade hatch
 USER vscode
+RUN hatch env create test \
+    && hatch env create lint \
+    && hatch env create types \
+    && hatch env create docs \
+    && hatch build
 
 FROM base AS prod
 COPY --from=dev /app/dist/*.whl /tmp/

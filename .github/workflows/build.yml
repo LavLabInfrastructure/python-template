@@ -1,22 +1,22 @@
-name: Build Wheel using Hatch
+name: Build package
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  build-wheel:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build Docker image
-        run: docker build --target hatch -t myapp:hatch .
-      - name: Build wheel with hatch
-        run: docker run --rm -v "${{ github.workspace }}:/app" myapp:hatch build
-      - name: Upload wheel
-        uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
-          name: wheel
-          path: dist/*.whl
+          python-version: "3.14"
+      - name: Install Hatch
+        run: python -m pip install --upgrade hatch
+      - name: Build wheel and source distribution
+        run: hatch build

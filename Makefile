@@ -1,14 +1,22 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help test cov lint format fix types docs serve-docs build clean install pre-commit
+.PHONY: help check test cov lint format fix types docs serve-docs build clean install pre-commit docker-dev docker-prod
 
 help: ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-install: ## Install the package in development mode with hatch
-	pip install hatch
-	hatch env create
+install: ## Install Hatch and create development environments
+	python -m pip install --upgrade hatch
+	hatch env create test lint types docs
+
+check: ## Run all pre-commit checks (format, lint, types, tests, docs, package build)
+	hatch run lint:format-check
+	hatch run lint:check
+	hatch run types:check
+	hatch run test:cov
+	hatch run docs:build-docs
+	hatch build
 
 test: ## Run tests
 	hatch run test:test
@@ -28,10 +36,10 @@ fix: ## Auto-fix lint issues and format
 types: ## Run mypy type checking
 	hatch run types:check
 
-docs: ## Build documentation
+docs: ## Build documentation with Zensical
 	hatch run docs:build-docs
 
-serve-docs: ## Serve documentation locally
+serve-docs: ## Serve documentation locally with Zensical
 	hatch run docs:serve-docs
 
 build: ## Build wheel and sdist

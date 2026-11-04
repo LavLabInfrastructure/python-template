@@ -10,7 +10,7 @@ This is a Python project template providing a consistent, feature-rich starting 
 - **[Ruff](https://docs.astral.sh/ruff/)** for linting and formatting
 - **[pytest](https://docs.pytest.org/)** with coverage reporting
 - **[mypy](https://mypy.readthedocs.io/)** for static type checking
-- **[MkDocs](https://www.mkdocs.org/)** with Material theme for documentation
+- **[Zensical](https://zensical.org/)** for documentation, with the modern theme
 - **[Docker](https://www.docker.com/)** multi-stage builds (dev, hatch, prod)
 - **[pre-commit](https://pre-commit.com/)** hooks for consistent commits
 - **GitHub Actions** CI/CD workflows
@@ -26,7 +26,7 @@ pip install python-template
 
 ### Development Setup
 
-Clone the repository and install [Hatch](https://hatch.pypa.io/latest/install/):
+Clone the repository and install [Hatch](https://hatch.pypa.io/latest/install/). Python 3.11 or newer is required:
 
 ```console
 git clone https://github.com/LavLabInfrastructure/python-template.git
@@ -72,13 +72,12 @@ python-template/
 │   ├── conftest.py            # Shared fixtures
 │   └── test_example.py        # Example tests
 ├── docs/                      # Documentation source
-├── requirements/              # Locked dependency files (auto-generated)
 ├── .devcontainer/             # Dev container configuration
 ├── .github/                   # GitHub Actions & Dependabot
 ├── pyproject.toml             # Project metadata & tool config
 ├── Dockerfile                 # Multi-stage Docker build
 ├── Makefile                   # Common task shortcuts
-├── mkdocs.yml                 # Documentation config
+├── zensical.toml              # Zensical configuration
 └── .pre-commit-config.yaml    # Pre-commit hooks
 ```
 
