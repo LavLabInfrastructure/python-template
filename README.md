@@ -3,6 +3,7 @@
 [![Build](https://github.com/LavLabInfrastructure/python-template/actions/workflows/build.yml/badge.svg)](https://github.com/LavLabInfrastructure/python-template/actions/workflows/build.yml)
 [![Tests](https://github.com/LavLabInfrastructure/python-template/actions/workflows/pytest.yml/badge.svg)](https://github.com/LavLabInfrastructure/python-template/actions/workflows/pytest.yml)
 [![Lint](https://github.com/LavLabInfrastructure/python-template/actions/workflows/lint.yml/badge.svg)](https://github.com/LavLabInfrastructure/python-template/actions/workflows/lint.yml)
+[![Docs](https://github.com/LavLabInfrastructure/python-template/actions/workflows/docs.yml/badge.svg)](https://lavlabinfrastructure.github.io/python-template/)
 [![PyPI - Version](https://img.shields.io/pypi/v/python-template.svg)](https://pypi.org/project/python-template)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/python-template.svg)](https://pypi.org/project/python-template)
 
@@ -20,7 +21,7 @@ A consistent, feature-rich template for Python projects. Use this as a starting 
 | Type checking | [mypy](https://mypy.readthedocs.io/) |
 | Documentation | [Zensical](https://zensical.org/) (modern theme) + [mkdocstrings](https://mkdocstrings.github.io/) |
 | Containerization | Multi-stage [Dockerfile](./Dockerfile) (dev / hatch / prod) |
-| CI/CD | [GitHub Actions](./.github/workflows/) with Dependabot; Python 3.11–3.15 test matrix |
+| CI/CD | [GitHub Actions](./.github/workflows/) with Dependabot, Python 3.11–3.15 tests, and GitHub Pages deployment |
 | Dev environment | [Dev Container](./.devcontainer/) for VS Code / Codespaces |
 | Git hygiene | [pre-commit](./.pre-commit-config.yaml) hooks |
 
@@ -104,6 +105,10 @@ image** workflow and enable its publish option. The workflow uses `GITHUB_TOKEN`
 registry secret is needed. Set the GHCR package visibility to public if unauthenticated
 pulls are desired.
 
+Documentation is published to [GitHub Pages](https://lavlabinfrastructure.github.io/python-template/)
+when changes are pushed to `main`. Enable **Settings → Pages → Build and deployment →
+Source: GitHub Actions** in a repository created from this template.
+
 ## Project Structure
 
 ```text
@@ -121,7 +126,7 @@ python-template/
 ├── docs/                        # Documentation source files
 ├── .devcontainer/               # Dev container config
 ├── .github/
-│   ├── workflows/               # CI, tests, lint, and Docker publishing
+│   ├── workflows/               # CI, docs deployment, and Docker publishing
 │   └── dependabot.yml           # Auto-update deps + actions + Docker
 ├── pyproject.toml               # All project & tool configuration
 ├── Dockerfile                   # Multi-stage build
@@ -158,3 +163,33 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines.
 ## License
 
 `python-template` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+
+## Template customization checklist
+
+When creating a repository from this template, update these references if its repository
+name or owner changes:
+
+### Replace the repository name `python-template`
+
+- `README.md`: workflow badge URLs, PyPI badges and install/CLI examples, clone URL and
+  directory, GHCR image path, project tree, template instructions, and license text.
+- `CONTRIBUTING.md`: clone URL and directory.
+- `docs/index.md`: title, install/CLI examples, clone URL and directory, and project tree.
+- `pyproject.toml`: project distribution name, console-script name, repository URLs, and
+  coverage path patterns.
+- `src/python_template/cli.py`: displayed CLI program name and description.
+- `zensical.toml`: documentation site name (`Python Template`) and Pages URL.
+
+If the Python package name also changes, rename `src/python_template/` and update its
+imports and references in `pyproject.toml`, `tests/`, `docs/`, and the Docker healthcheck.
+
+### Replace the repository owner `LavLabInfrastructure`
+
+- `README.md`: GitHub Actions badge URLs, GitHub Pages URL, clone URL, and GHCR image path
+  (the GHCR owner is lowercase: `lavinfrastructure`).
+- `CONTRIBUTING.md` and `docs/index.md`: clone URLs.
+- `pyproject.toml`: Documentation, Issues, and Source URLs.
+- `zensical.toml`: GitHub Pages URL.
+
+The Docker publishing workflow derives the owner and repository name from
+`GITHUB_REPOSITORY`, so it does not need owner-specific edits.

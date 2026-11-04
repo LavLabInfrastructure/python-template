@@ -1,5 +1,6 @@
 [project]
 site_name = "Python Template"
+site_url = "https://lavlabinfrastructure.github.io/python-template/"
 nav = ["index.md", { "API Reference" = "api.md" }]
 
 [project.theme]
