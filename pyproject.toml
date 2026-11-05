@@ -45,6 +45,14 @@ packages = ["src/python_template"]
 dependencies = []
 
 [tool.hatch.envs.default.scripts]
+check = [
+  "hatch run lint:format-check",
+  "hatch run lint:check",
+  "hatch run types:check",
+  "hatch run test:cov",
+  "hatch run docs:build-docs",
+  "hatch build",
+]
 build = "hatch build"
 
 [tool.hatch.envs.test]

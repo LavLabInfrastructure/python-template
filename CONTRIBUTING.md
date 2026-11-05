@@ -85,10 +85,10 @@ def test_example_returns_input_unchanged():
    git checkout -b feature/my-change
    ```
 
-2. **Make your changes** and run the complete pre-commit check suite:
+2. **Make your changes** and run the complete check suite:
 
    ```console
-   make check
+   hatch run check
    ```
 
 3. **Commit** with a clear, descriptive message. Pre-commit hooks will run Ruff automatically.

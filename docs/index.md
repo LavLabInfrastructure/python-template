@@ -38,6 +38,7 @@ pip install hatch
 
 | Task | Command |
 |------|---------|
+| Run full check suite | `hatch run check` |
 | Run tests | `hatch run test:test` |
 | Run tests with coverage | `hatch run test:cov` |
 | Lint code | `hatch run lint:check` |
@@ -47,6 +48,7 @@ pip install hatch
 | Build docs | `hatch run docs:build-docs` |
 | Serve docs locally | `hatch run docs:serve-docs` |
 | Build wheel | `hatch build` |
+| Clean build artifacts | `hatch clean` |
 
 ### CLI Usage
 
@@ -76,7 +78,6 @@ python-template/
 ├── .github/                   # GitHub Actions & Dependabot
 ├── pyproject.toml             # Project metadata & tool config
 ├── Dockerfile                 # Multi-stage Docker build
-├── Makefile                   # Common task shortcuts
 ├── zensical.toml              # Zensical configuration
 └── .pre-commit-config.yaml    # Pre-commit hooks
 ```

@@ -69,13 +69,13 @@ pre-commit install
 
 ### Common Commands
 
-Run the full pre-commit suite with `make check`; it checks formatting, lint, types, tests
+Run the full check suite with `hatch run check`; it checks formatting, lint, types, tests
 with coverage, documentation, and the package build. Use individual commands below for
-focused work. Other tasks are also available through the provided [`Makefile`](./Makefile).
+focused work. Hatch creates each required environment on first use.
 
 | Task | Command |
 |------|---------|
-| Run all pre-commit checks | `make check` |
+| Run full check suite | `hatch run check` |
 | Run tests | `hatch run test:test` |
 | Tests + coverage | `hatch run test:cov` |
 | Lint | `hatch run lint:check` |
@@ -86,7 +86,7 @@ focused work. Other tasks are also available through the provided [`Makefile`](.
 | Build docs | `hatch run docs:build-docs` |
 | Serve docs | `hatch run docs:serve-docs` |
 | Build wheel | `hatch build` |
-| Clean artifacts | `make clean` |
+| Clean build artifacts | `hatch clean` |
 
 ### Docker
 
@@ -130,7 +130,6 @@ python-template/
 │   └── dependabot.yml           # Auto-update deps + actions + Docker
 ├── pyproject.toml               # All project & tool configuration
 ├── Dockerfile                   # Multi-stage build
-├── Makefile                     # Dev shortcuts
 ├── zensical.toml                # Zensical configuration
 ├── .pre-commit-config.yaml      # Pre-commit hooks
 ├── .editorconfig                # Editor consistency
