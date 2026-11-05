@@ -38,6 +38,10 @@ Choose dependencies based on the use case rather than adding every preferred pac
 - Avoid TensorFlow by default; prefer PyTorch and compatible tools such as MONAI for deep-learning workflows.
 - Do not add a disfavored package just because it is common. Explain the tradeoff and ask before introducing one when there is no suitable preferred alternative.
 
+## Git Branching
+
+For Git projects whose `origin` is a GitHub organization, create a new branch with a concise, descriptive name before making changes. Check the current branch and worktree first, and preserve any existing uncommitted user changes; do not switch branches if doing so could disrupt them.
+
 ## Development Workflow
 
 1. Inspect the existing module, its callers, and tests before changing architecture or public APIs.
